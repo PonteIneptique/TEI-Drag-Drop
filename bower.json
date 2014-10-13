@@ -1,9 +1,12 @@
 {
-	"name": "tea-drag-drop",
+	"name": "tei-drag-drop",
 	"version": "0.1.0",
-	"authors": [
-		"Thibault Clérice"
-	],
+	"authors" : "Thibault Clérice",
+	"author": {
+		"name": "Thibault Clérice",
+		"email": "leponteineptique@gmail.com",
+		"url": "https://github.com/PonteIneptique"
+	},
 	"description": "jQuery plugin to order words on a grid and generate xml output",
 	"main": "./src/TEI-Drag-Drop.js",
 	"keywords": [
@@ -14,6 +17,12 @@
 		"plugin"
 	],
 	"license": "GNU GPL",
+	"licenses": [
+		{
+			"type": "GNU GPL",
+			"url" : "https://github.com/PonteIneptique/TEI-Drag-Drop/blob/master/LICENSE"
+		}
+	],
 	"ignore": [
 		"node_modules",
 		"bower_components",
