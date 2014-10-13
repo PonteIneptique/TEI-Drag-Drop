@@ -31,7 +31,7 @@
 				"watch" : true,	//If set to true, the plugin will watch for modifications made on the $elements
 				"line" : "<l />",
 				"linegroup" : "<lg />", //Dom elements to regroup lines
-				"linebreak" : null, //Element to insert before the end of a line
+				"linebreak" : "<lb />", //Element to insert before the end of a line
 				"grid-selector" : null, //If not set, create a grid after $elements. Else create a grid IN grid-selector
 				"rows" : 3, // "Base widget dimensions in pixels. The first index is the width, the second is the height."
 				"widthHeightRatio" : 1.50, //"widthHeightRatio" applied for blocks
@@ -130,6 +130,56 @@
 		var _changed = function () {
 			_addBlocks(_returnNodes())
 			_reload()
+		}
+
+		var _toArray = function(object) {
+			var data = []
+			for(var i = 0; i < Object.keys(object).length; i++) {
+				data.push("");
+			}
+			$.each(object, function(index, element) {
+				if (element !== null && typeof element === 'object') {
+					element = _toArray(element)
+				}
+				data[parseInt(index)] = element;
+			});
+			return data;
+		}
+
+		var _toXML = function(rows) {
+			var lines = [];
+
+			for(var i = 0; i < rows.length; i++) {
+				var $l = $($params["line"]);
+				$l.attr("n", i)
+
+				if($params["linebreak"]) {
+					rows[i].push(
+						$("<div />").html(
+							$($params["linebreak"]).attr("n", i)
+						).html()
+					)
+				}
+
+				$l.html(rows[i].join("\n\t"))
+
+				lines.push(
+					$("<div />").html($l).html()
+				)
+			}
+
+			return lines.join("\n")
+		}
+
+		var _serialize = function() {
+			var $items = $grid.data('_gridList')._items;
+			var $rows = {}
+			$.each($items, function(index, element) {
+				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
+				$rows[element.y][element.x] = element.$element.data("xml-representation");
+			})
+
+			return _toXML(_toArray($rows));
 		}
 
 		$blocks = _returnNodes()
