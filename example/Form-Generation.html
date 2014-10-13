@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>title</title>
+		<link rel="stylesheet" href="../plugins/gridster.min.css">
+		<script src="../plugins/gridster.min.js"></script>
+		<style type="text/css">
+			html, body, #form {
+				margin:0;
+				padding:0;
+				width:100%;
+			}
+
+			#form > #textarea {
+				width: 100%;
+				padding:0;
+				border:0;
+				border-top:1px solid grey;
+				border-bottom:1px solid grey;
+			}
+			#tei-grid-container {
+				overflow-x:auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="form">
+			<h2>Form</h2>
+			<textarea id="textarea"></textarea>
+		</div>
+		<h2>Grid</h2>
+		<div class="tei-grid-container">
+			<ul>
+			</ul>
+		</div>
+	</body>
+</html>
