@@ -39,7 +39,9 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {	//When DOM is ready
-				$("#textarea").teidragdrop()
+				$("#textarea").teidragdrop({
+					"grid-selector" : ".tei-grid-container"
+				})
 			});
 		</script>
 	</body>
