@@ -19,6 +19,7 @@
 
 		console.log($originalValue)
 
-	}
-
-});
+		return this;
+	};
+	
+}( jQuery ));
