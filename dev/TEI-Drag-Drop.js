@@ -44,7 +44,6 @@
 		//<- Grid Plugin Dependent functions
 
 		//Return a hash for a node
-
 		var _toolbarGeneration = function() {
 			var $toolbar = $("<div />", {
 				"id" : ""
@@ -133,7 +132,7 @@
 		}
 
 		var _reload = function () {
-			_applyXY()
+			if(typeof $grid.data("_gridList")._items !== "undefined") { _applyXY(); }
 			var instance = $grid.data('_gridList', false)
 			_createGrid()
 		}
@@ -186,8 +185,7 @@
 			//If not instantiated
 			if(typeof $grid === "undefined" || typeof $grid.data('_gridList') === "undefined" || typeof $grid.data('_gridList')._items === "undefined" ) {
 				if(typeof items === "number") {
-					console.log(items)
-					return [items - 1, 0]
+					return [items - 1, 0];
 				} else {
 					return false;
 				}
@@ -220,6 +218,13 @@
 			return _toXML(_toArray($rows));
 		}
 
+
+		/*********************************************************************
+		 *********************************************************************
+		 *******INIT**********************************************************
+		 *********************************************************************
+		 *********************************************************************/
+
 		$blocks = _returnNodes()
 		//Extends and merge params
 		$.extend($params, params);
@@ -238,7 +243,6 @@
 			$elements.after($container)
 		}
 
-		_initiateGrid()
 
 
 		//Params dependent watch
@@ -250,10 +254,12 @@
 		if($params["btn"]) {
 			$params["btn"].on("click", function() {
 				console.log(_serialize())
-			})
+			});
 		}
 
-		//<- Debug
+		_initiateGrid()
+
+		//<- Debug which should throw error
 		if(!$elements.is("textarea")) {
 			console.log("Element on which instance is built is not a textarea.")
 		}
