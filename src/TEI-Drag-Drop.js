@@ -1,4 +1,11 @@
-(function ( $ ) {
+(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+	// AMD. Register as an anonymous module.
+		define(['jquery'], factory);
+	} else {
+		factory(jQuery);
+	}
+}(function($) {
 	//PLACEHOLDER FOR FUTURE I18N
 	var $lang = {
 		"GetXML" : "Get XML",
@@ -399,4 +406,4 @@
 		return this;
 	};
 
-}( jQuery ));
+}));
