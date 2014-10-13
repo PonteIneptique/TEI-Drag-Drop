@@ -2,10 +2,9 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>title</title>
+		<title>Test with a watched form</title>
 		<script src="../plugins/jquery.min.js"></script>
 		<script src="../plugins/gridster.min.js"></script>
-
 		<script src="../dev/TEI-Drag-Drop.js"></script>
 
 		<link rel="stylesheet" href="../plugins/gridster.min.css" />
@@ -31,7 +30,7 @@
 	<body>
 		<div id="form">
 			<h2>Form</h2>
-			<textarea id="textarea"></textarea>
+			<textarea id="textarea"><w>AHAH</w></textarea>
 		</div>
 		<h2>Grid</h2>
 		<div class="tei-grid-container">
@@ -40,7 +39,7 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {	//When DOM is ready
-
+				$("#textarea").teidragdrop()
 			});
 		</script>
 	</body>
