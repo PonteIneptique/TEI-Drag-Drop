@@ -99,12 +99,25 @@
 			if($container.find("ul").length == 0) {  $container.append("<ul></ul>"); }
 			//We initialize gridster
 			$grid = $container.find("ul");
-			
+
 			_addBlocks($blocks)
+			_createGrid()
+		}
+
+		var _createGrid = function() {
 			$grid.gridList({
 				rows: $params["rows"],
 				widthHeightRatio : $params["widthHeightRatio"]
 			});
+		}
+		var _reload = function () {
+			var instance = $grid.data('_gridList', false)
+			_createGrid()
+		}
+
+		var _changed = function () {
+			_addBlocks(_returnNodes())
+			_reload()
 		}
 
 		$blocks = _returnNodes()
@@ -131,7 +144,7 @@
 		//Params dependent watch
 		if($params["watch"] === true) {
 			$elements.on("change", function() {
-				_addBlocks(_returnNodes())
+				_changed()
 			})
 		}
 		if($params["btn"]) {
