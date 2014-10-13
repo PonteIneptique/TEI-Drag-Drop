@@ -6,9 +6,7 @@
 		"Thibault Clerice"
 	],
 	"description": "jQuery plugin to order words on a grid and generate xml output",
-	"main": [
-		"./src/TEI-Drag-Drop.js"
-	],
+	"main": "./src/TEI-Drag-Drop.js",
 	"keywords": [
 		"jquery",
 		"jqueryUI",
@@ -20,6 +18,8 @@
 	"ignore": [
 		"node_modules",
 		"bower_components",
-		"test"
+		"test",
+		"example",
+		"plugins"
 	]
 }
