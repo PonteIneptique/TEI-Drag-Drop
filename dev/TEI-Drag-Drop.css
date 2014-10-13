@@ -25,7 +25,9 @@
 .teidragdrop-container > ul li .inner {
     background: none repeat scroll 0 0 #fff;
     border: 1px solid #bbb;
-    margin: 2px;
+	position:absolute;
+	top:2px; left:2px; bottom:2px; right:2px;
+	margin: auto;
 	-webkit-transition: background 3s;
 }
 .teidragdrop-container > ul li.changed .inner {
