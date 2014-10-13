@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"homepage": "https://github.com/PonteIneptique/TEI-Drag-Drop",
 	"authors": [
-		"Thibault Clerice"
+		"Thibault Clérice"
 	],
 	"description": "jQuery plugin to order words on a grid and generate xml output",
 	"main": "./src/TEI-Drag-Drop.js",
@@ -20,6 +20,7 @@
 		"bower_components",
 		"test",
 		"example",
-		"plugins"
+		"plugins",
+		"dist"
 	]
 }
