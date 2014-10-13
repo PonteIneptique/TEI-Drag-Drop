@@ -20,8 +20,8 @@ module.exports = function(grunt) {
 		// Concat definitions
 		concat: {
 			dist: {
-				src: ["src/TEI-drag-drop.js"],
-				dest: "dist/jquery.boilerplate.js"
+				src: ["src/TEI-Drag-Drop.js"],
+				dest: "dist/TEI-Drag-Drop.js"
 			},
 			options: {
 				banner: "<%= meta.banner %>"
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 
 		// Lint definitions
 		jshint: {
-			files: ["src/jquery.boilerplate.js"],
+			files: ["src/TEI-Drag-Drop.js"],
 			options: {
 				jshintrc: ".jshintrc"
 			}
@@ -39,8 +39,8 @@ module.exports = function(grunt) {
 		// Minify definitions
 		uglify: {
 			my_target: {
-				src: ["dist/TEI-drag-drop.js"],
-				dest: "dist/TEI-drag-drop.min.js"
+				src: ["dist/TEI-Drag-Drop.js"],
+				dest: "dist/TEI-Drag-Drop.min.js"
 			},
 			options: {
 				banner: "<%= meta.banner %>"
