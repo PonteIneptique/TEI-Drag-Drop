@@ -1,0 +1,27 @@
+{
+	"name": "tea-drag-drop",
+	"version": "0.1.0",
+	"homepage": "https://github.com/PonteIneptique/TEI-Drag-Drop",
+	"authors": [
+		"Thibault Clerice"
+	],
+	"description": "jQuery plugin to order words on a grid and generate xml output",
+	"main": [
+		"./src/TEI-Drag-Drop.js"
+	],
+	"keywords": [
+		"jquery",
+		"jqueryUI",
+		"grid",
+		"tei",
+		"plugin"
+	],
+	"license": "GNU GPL",
+	"ignore": [
+		"example",
+		"src",
+		".gitignore",
+		"LICENSE",
+		"README.md"
+	]
+}
