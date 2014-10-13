@@ -33,15 +33,18 @@
 				"linegroup" : "<lg />", //Dom elements to regroup lines
 				"linebreak" : null, //Element to insert before the end of a line
 				"grid-selector" : null, //If not set, create a grid after $elements. Else create a grid IN grid-selector
-				"widget_base_dimensions" : [100,30], // "Base widget dimensions in pixels. The first index is the width, the second is the height."
-				"resize.enabled" : true, //"Set to true to enable drag-and-drop widget resizing. This setting doesn't affect to the resize_widget method."
+				"rows" : 3, // "Base widget dimensions in pixels. The first index is the width, the second is the height."
+				"widthHeightRatio" : 1.50, //"widthHeightRatio" applied for blocks
 				"btn.class" : "btn", //Class for the button
 				"btn.legend" : "Serialize",
 				"btn" : null, //Generate the button if null, else should be a DOM object
 
 			}
 
+		//<- Grid Plugin Dependent functions
+
 		//Return a hash for a node
+
 		var _checksum = function(DOMObject) {
 			var s = $("<div />").append(DOMObject).html(),
 				hash = 0,
@@ -58,7 +61,6 @@
 			}
 			return hash;
 		};
-
 		//Return a set of filtered nodes (== No TextNode) from a given TextArea
 		var _returnNodes = function() {
 			var blocks = []
@@ -71,6 +73,40 @@
 			});
 			return blocks;
 		}
+
+		var _addBlocks = function(list) {
+			$.each(list, function(index, block) {
+				_addBlock(index, block)
+			})
+		}
+		//->Grid Plugin Dependent functions
+
+		var _addBlock = function(index, block) {
+			var $block = $("<li />");
+			var $wrapper = $("<div />").html(block);	//Work around for getting proper properties
+
+			$block.data("xml-representation", $wrapper.html())
+			$block.append($("<div />", { "class" : "inner" }).text($wrapper.text()))
+			$block.attr("data-w", 1)
+			$block.attr("data-h", 1)
+
+			$grid.append($block)
+		}
+
+
+		var _initiateGrid = function() {
+			//If there is not <ul>, we need to create one
+			if($container.find("ul").length == 0) {  $container.append("<ul></ul>"); }
+			//We initialize gridster
+			$grid = $container.find("ul");
+			
+			_addBlocks($blocks)
+			$grid.gridList({
+				rows: $params["rows"],
+				widthHeightRatio : $params["widthHeightRatio"]
+			});
+		}
+
 		$blocks = _returnNodes()
 		//Extends and merge params
 		$.extend($params, params);
@@ -89,41 +125,18 @@
 			$elements.after($container)
 		}
 
-		var _addBlock = function(index, block) {
-			var $block = $("<li />");
-			var $wrapper = $("<div />").html(block);	//Work around for getting proper properties
-
-			$block.data("xml-representation", $wrapper.html())
-			$block.text($wrapper.text())
-
-			$gridster.add_widget($block)
-		}
-
-		var _addBlocks = function(list) {
-			$.each(list, function(index, block) {
-				_addBlock(index, block)
-			})
-		}
-
-		var _initiateGrid = function() {
-			//If there is not <ul>, we need to create one
-			if($container.find("ul").length == 0) {  $container.append("<ul></ul>"); }
-			//We initialize gridster
-			$grid = $container.find("ul");
-
-			$gridster = $grid.gridster({
-				"widget_base_dimensions" : $params["widget_base_dimensions"],
-				"resize.enabled" : $params["resize.enabled"]
-			}).data('gridster');
-			_addBlocks($blocks)
-		}
 		_initiateGrid()
 
+
+		//Params dependent watch
 		if($params["watch"] === true) {
-			console.log("WATCH")
 			$elements.on("change", function() {
-				console.log("HEY")
 				_addBlocks(_returnNodes())
+			})
+		}
+		if($params["btn"]) {
+			$params["btn"].on("click", function() {
+				console.log(_serialize())
 			})
 		}
 
@@ -132,13 +145,6 @@
 			console.log("Element on which instance is built is not a textarea.")
 		}
 		//-> Debug
-
-		if($params["btn"]) {
-			$params["btn"].on("click", function() {
-				console.log($gridster.serialize())
-			})
-		}
-
 
 		//Mandatory
 		return this;

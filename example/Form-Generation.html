@@ -4,10 +4,13 @@
 		<meta charset="utf-8">
 		<title>Test with a watched form</title>
 		<script src="../plugins/jquery.min.js"></script>
-		<script src="../plugins/gridster.min.js"></script>
+		<script src="../plugins/jqueryUI.min.js"></script>
+		<script src="../plugins/gridList.js"></script>
+		<script src="../plugins/jquery.gridList.js"></script>
+
 		<script src="../dev/TEI-Drag-Drop.js"></script>
 
-		<link rel="stylesheet" href="../plugins/gridster.min.css" />
+		<link rel="stylesheet" href="../dev/TEI-Drag-Drop.css" />
 		<style type="text/css">
 			html, body, #form {
 				margin:0;
@@ -23,7 +26,6 @@
 				border-bottom:1px solid grey;
 			}
 			.tei-grid-container {
-				overflow-x:auto;
 				background-color:#004756;
 				height:200px;
 			}
@@ -55,6 +57,7 @@
 				background: transparent;
 				border: 1px dashed red;
 			}
+
 		</style>
 	</head>
 	<body>
@@ -78,7 +81,7 @@
 			</textarea>
 		</div>
 		<h2>Grid</h2>
-		<div class="tei-grid-container">
+		<div class="tei-grid-container teidragdrop-container">
 			<ul>
 			</ul>
 		</div>
