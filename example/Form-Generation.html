@@ -11,6 +11,9 @@
 		<script src="../dev/TEI-Drag-Drop.js"></script>
 
 		<link rel="stylesheet" href="../dev/TEI-Drag-Drop.css" />
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 		<style type="text/css">
 			html, body, #form {
 				margin:0;
@@ -19,7 +22,6 @@
 			}
 
 			#form > #textarea {
-				width: 100%;
 				padding:0;
 				border:0;
 				border-top:1px solid grey;
@@ -63,8 +65,6 @@
 	<body>
 		<div id="form">
 			<h2>Form</h2>
-			<input type="button" value="Add new node" id="test-demo-add-node" />
-			<input type="button" value="Serialize" id="serialize" />
 			<textarea id="textarea">
 				<w facs="urn:cite:perseus:epifacsimg.77@0.0691,0.3912,0.032,0.0498">εἴ</w>
 				<w facs="urn:cite:perseus:epifacsimg.77@0.1051,0.3807,0.0601,0.0559">τις</w>
@@ -79,6 +79,20 @@
 				<w facs="urn:cite:perseus:epifacsimg.77@0.5656,0.4381,0.0831,0.0453">τοδ'</w>
 				<w facs="urn:cite:perseus:epifacsimg.77@0.6426,0.4381,0.1592,0.0498">ἔτυχον</w>
 			</textarea>
+			<div class="teidragdrop-toolbar">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default">Left</button>
+					<button type="button" class="btn btn-default">Middle</button>
+					<button type="button" class="btn btn-primary teidragdrop-serialize">Export</button>
+				</div>
+				<div class="input-group" style="width:200px; float:left; margin-right:10px;" >
+					<span class="input-group-addon">Number of Lines</span>
+					<input type="text" class="form-control" placeholder="Lines">
+				</div>
+
+				<button type="button" class="btn btn-primary" id="test-demo-add-node">Add new node</button>
+			</div>
+
 		</div>
 		<h2>Grid</h2>
 		<div class="tei-grid-container teidragdrop-container">

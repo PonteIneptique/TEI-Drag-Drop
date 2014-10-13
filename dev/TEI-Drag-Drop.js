@@ -33,8 +33,8 @@
 				"linegroup" : "<lg />", //Dom elements to regroup lines
 				"linebreak" : "<lb />", //Element to insert before the end of a line
 				"grid-selector" : null, //If not set, create a grid after $elements. Else create a grid IN grid-selector
-				"rows" : 3, // "Base widget dimensions in pixels. The first index is the width, the second is the height."
-				"widthHeightRatio" : 1.50, //"widthHeightRatio" applied for blocks
+				"rows" : 4, // "Base widget dimensions in pixels. The first index is the width, the second is the height."
+				"widthHeightRatio" : 2, //"widthHeightRatio" applied for blocks
 				"btn.class" : "btn", //Class for the button
 				"btn.legend" : "Serialize",
 				"btn" : null, //Generate the button if null, else should be a DOM object
@@ -44,6 +44,12 @@
 		//<- Grid Plugin Dependent functions
 
 		//Return a hash for a node
+
+		var _toolbarGeneration = function() {
+			var $toolbar = $("<div />", {
+				"id" : ""
+			})
+		}
 
 		var _checksum = function(DOMObject) {
 			var s = $("<div />").append(DOMObject).html(),
@@ -82,17 +88,22 @@
 		//->Grid Plugin Dependent functions
 
 		var _addBlock = function(index, block) {
-			var $block = $("<li />");
-			var $wrapper = $("<div />").html(block);	//Work around for getting proper properties
+			var $block = $("<li />"),
+				$wrapper = $("<div />").html(block),	//Work around for getting proper properties
+				$xy  = _lastItem($grid.find("li").length + 1);
+
 
 			$block.data("xml-representation", $wrapper.html())
 			$block.append($("<div />", { "class" : "inner" }).text($wrapper.text()))
 			$block.attr("data-w", 1)
 			$block.attr("data-h", 1)
 
+			$block.attr("data-x", $xy[0])
+			$block.attr("data-y", $xy[1])
+
 			//A new item should be added at the end of the list
 
-			$grid.append($block)
+			$grid.append($block);
 		}
 
 
@@ -169,6 +180,33 @@
 			}
 
 			return lines.join("\n")
+		}
+
+		var _lastItem = function (items) {
+			//If not instantiated
+			if(typeof $grid === "undefined" || typeof $grid.data('_gridList') === "undefined" || typeof $grid.data('_gridList')._items === "undefined" ) {
+				if(typeof items === "number") {
+					console.log(items)
+					return [items - 1, 0]
+				} else {
+					return false;
+				}
+			}
+
+			var $items = $grid.data('_gridList')._items,
+				$rows = {},
+				x = 0,
+				y = 0;
+			$.each($items, function(index, element) {
+				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
+				$rows[element.y][element.x] = element.$element.data("xml-representation");
+			})
+			$rows = _toArray($rows);
+			y = $rows.length;
+			x = $rows[y-1].length;
+
+			return [x, y - 1];
+
 		}
 
 		var _serialize = function() {
