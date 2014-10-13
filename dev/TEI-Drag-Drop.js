@@ -90,6 +90,8 @@
 			$block.attr("data-w", 1)
 			$block.attr("data-h", 1)
 
+			//A new item should be added at the end of the list
+
 			$grid.append($block)
 		}
 
@@ -110,7 +112,17 @@
 				widthHeightRatio : $params["widthHeightRatio"]
 			});
 		}
+
+		var _applyXY = function() {
+
+			$.each($grid.data('_gridList')._items, function(index, element) {
+				element.$element.attr("data-x", element.x)
+				element.$element.attr("data-y", element.y)
+			});
+		}
+
 		var _reload = function () {
+			_applyXY()
 			var instance = $grid.data('_gridList', false)
 			_createGrid()
 		}
@@ -158,6 +170,9 @@
 			console.log("Element on which instance is built is not a textarea.")
 		}
 		//-> Debug
+
+		//API ACCESS
+		this.reload = _reload;
 
 		//Mandatory
 		return this;
