@@ -18,10 +18,8 @@
 	],
 	"license": "GNU GPL",
 	"ignore": [
-		"example",
-		"src",
-		".gitignore",
-		"LICENSE",
-		"README.md"
+		"node_modules",
+		"bower_components",
+		"test"
 	]
 }
