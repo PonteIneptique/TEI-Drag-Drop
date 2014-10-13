@@ -1,4 +1,11 @@
 (function ( $ ) {
+	//PLACEHOLDER FOR FUTURE I18N
+	var $lang = {
+		"GetXML" : "Get XML",
+		"ToggleXML" : "Show / Hide XML",
+		"UpdateLines" : "Update Lines",
+		"Lines" : "Lines"
+	}
 
 	//IE FIX for indexOf ( http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value )
 	var indexOf = function(needle) {
@@ -30,6 +37,7 @@
 			$params = { //Default Params
 				"watch" : true,	//If set to true, the plugin will watch for modifications made on the $elements
 				"line" : "<l />",
+				"toolbar" : ["Serialize", "ToggleXML"], //List of available buttons to add in the toolbar 
 				"linegroup" : "<lg />", //Dom elements to regroup lines
 				"linebreak" : "<lb />", //Element to insert before the end of a line
 				"grid-selector" : null, //If not set, create a grid after $elements. Else create a grid IN grid-selector
@@ -38,19 +46,92 @@
 				"btn.class" : "btn", //Class for the button
 				"btn.legend" : "Serialize",
 				"btn" : null, //Generate the button if null, else should be a DOM object
-
+				"startline" : 1, //Line from which we count
+				"pre" : true, //Append a <pre> in the toolbar if set to true
+				"linestool" : true //Add a tool to add lines to grid
 			}
 
 		//<- Grid Plugin Dependent functions
 
-		//Return a hash for a node
 		var _toolbarGeneration = function() {
+			/*
+			 *	Generate a toolbar
+			 */
+
+			//Toolbar itself
 			var $toolbar = $("<div />", {
-				"id" : ""
-			})
+				"class" : "teidragdrop-toolbar"
+				});
+				
+			if($params["toolbar"].length > 0) {
+				//<pre> For XML SHOWING
+				var $pre = $("<pre />", {
+					"style" : "width:90%;"
+					});
+				//Button for export and serialize to XML
+				var $exportBtn = $("<button />", {
+					"class" : "btn btn-default",
+					"type" : "button",
+					"text" : $lang["GetXML"]
+					});
+				$exportBtn.on("click", function() { $pre.text(_serialize()); })
+				var $hideXML = $("<button />", {
+					"class" : "btn btn-default",
+					"type" : "button",
+					"text" : $lang["ToggleXML"]
+					});
+				$hideXML.on("click", function() { $pre.toggle(); })
+
+				//List of Available buttons
+				var $available = {
+					"Serialize" : $exportBtn,
+					"ToggleXML" : $hideXML
+				}
+
+				//Button group for buttons
+				var $buttongroup = $("<div />", {
+					"class" : "btn-group"
+					});
+
+				for(var i = 0; i < $params["toolbar"].length; i++) {
+					$buttongroup.append($available[$params["toolbar"][i]])
+				}
+				$toolbar.append($buttongroup);
+			}
+
+			if($params["linestool"]) {
+				var $inputgroup = $("<div />", { "class" : "input-group", "style" : "width:200px; float:left; margin-right:10px;"}),
+					$inputaddon = $("<span />", { "class" : "input-group-addon", text : $lang["UpdateLines"]}),
+					$inputtext = $("<input />", { "class" : "form-control", type : "text", value : $params["rows"], placeholder : $lang["Lines"]})
+				
+				$inputtext.on("change", function() { _upgradeLines($inputtext.val()) });
+				$inputaddon.on("click", function() { _upgradeLines($inputtext.val()) });
+				$inputgroup.append($inputaddon, $inputtext);
+				$toolbar.append($inputgroup);
+			}
+
+			$toolbar.append($("<div />").append($pre))
+			$container.after($toolbar);
+
+		}
+
+		var _upgradeLines = function(lines) {
+			/*
+			 *	Reload with given number of lines
+			 */
+			if(!isNaN(lines)) {
+				$params["rows"] = parseInt(lines);
+				var $instance = _getInstance();
+				if(typeof $instance !== "undefined") {
+					$instance.resize($params["rows"])
+				}
+			}
 		}
 
 		var _checksum = function(DOMObject) {
+			/*
+			 *	Generate a unique checksum for a DOMObject
+			 */
 			var s = $("<div />").append(DOMObject).html(),
 				hash = 0,
 				strlen = s.length,
@@ -68,6 +149,9 @@
 		};
 		//Return a set of filtered nodes (== No TextNode) from a given TextArea
 		var _returnNodes = function() {
+			/*
+			 *	Return nodes from the textarea, verifying duplicates and textNodes
+			 */
 			var blocks = []
 			$.each($($elements.val()), function(index, block) {
 				var hash = _checksum(block)
@@ -80,6 +164,9 @@
 		}
 
 		var _addBlocks = function(list) {
+			/*
+			 *	Add a list of blocks to the grid
+			 */
 			$.each(list, function(index, block) {
 				_addBlock(index, block)
 			})
@@ -87,6 +174,9 @@
 		//->Grid Plugin Dependent functions
 
 		var _addBlock = function(index, block) {
+			/*
+			 *	Add a block to the grid
+			 */
 			var $block = $("<li />"),
 				$wrapper = $("<div />").html(block),	//Work around for getting proper properties
 				$xy  = _lastItem($grid.find("li").length + 1);
@@ -105,8 +195,10 @@
 			$grid.append($block);
 		}
 
-
 		var _initiateGrid = function() {
+			/*
+			 *		Initiate the grid. Only function to be called at the end of the setting
+			 */
 			//If there is not <ul>, we need to create one
 			if($container.find("ul").length == 0) {  $container.append("<ul></ul>"); }
 			//We initialize gridster
@@ -114,35 +206,71 @@
 
 			_addBlocks($blocks)
 			_createGrid()
+			
 		}
 
+
+
 		var _createGrid = function() {
+			/*
+			 *		Create the grid
+			 */
 			$grid.gridList({
 				rows: $params["rows"],
 				widthHeightRatio : $params["widthHeightRatio"]
 			});
 		}
 
-		var _applyXY = function() {
+		var _getInstance = function() {
+			return $grid.data('_gridList');
+		}
 
-			$.each($grid.data('_gridList')._items, function(index, element) {
+		var _applyXY = function() {
+			/*
+			 *		Apply XY position attributes to each li
+			 */
+			$.each(_getInstance()._items, function(index, element) {
 				element.$element.attr("data-x", element.x)
 				element.$element.attr("data-y", element.y)
 			});
 		}
 
+
 		var _reload = function () {
-			if(typeof $grid.data("_gridList")._items !== "undefined") { _applyXY(); }
+			/*
+			 *		Reload Grid
+			 */
+			if(typeof _getInstance()._items !== "undefined") { _applyXY(); }
 			var instance = $grid.data('_gridList', false)
 			_createGrid()
 		}
 
 		var _changed = function () {
+			/*
+			 *		Function to be called when textarea targeted is changed
+			 */
 			_addBlocks(_returnNodes())
 			_reload()
 		}
 
+		var _serialize = function() {
+			/*
+			 *	Serialize the grid with its XML representation
+			 */
+			var $items = $grid.data('_gridList')._items;
+			var $rows = {}
+			$.each($items, function(index, element) {
+				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
+				$rows[element.y][element.x] = element.$element.data("xml-representation");
+			})
+
+			return _toXML(_toArray($rows));
+		}
+
 		var _toArray = function(object) {
+			/*
+			 *		Transform an object using int keys as an array
+			 */
 			var data = []
 			for(var i = 0; i < Object.keys(object).length; i++) {
 				data.push("");
@@ -157,21 +285,25 @@
 		}
 
 		var _toXML = function(rows) {
+			/*
+			 *		Convert a 2 dimensional array to an XML object text representation
+			 */
 			var lines = [];
 
 			for(var i = 0; i < rows.length; i++) {
 				var $l = $($params["line"]);
-				$l.attr("n", i)
+				var n = i + $params["startline"];
+				$l.attr("n", n)
 
 				if($params["linebreak"]) {
 					rows[i].push(
 						$("<div />").html(
-							$($params["linebreak"]).attr("n", i)
+							$($params["linebreak"]).attr("n", n)
 						).html()
 					)
 				}
 
-				$l.html(rows[i].join("\n\t"))
+				$l.html("\n\t" + rows[i].join("\n\t") + "\n")
 
 				lines.push(
 					$("<div />").html($l).html()
@@ -181,8 +313,10 @@
 			return lines.join("\n")
 		}
 
-		var _lastItem = function (items) {
-			//If not instantiated
+		var _lastItem = function (items) {			
+			/*
+			 *		Return the position for a new item, including if $grid is not instantiated
+			 */
 			if(typeof $grid === "undefined" || typeof $grid.data('_gridList') === "undefined" || typeof $grid.data('_gridList')._items === "undefined" ) {
 				if(typeof items === "number") {
 					return [items - 1, 0];
@@ -204,19 +338,8 @@
 			x = $rows[y-1].length;
 
 			return [x, y - 1];
-
 		}
 
-		var _serialize = function() {
-			var $items = $grid.data('_gridList')._items;
-			var $rows = {}
-			$.each($items, function(index, element) {
-				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
-				$rows[element.y][element.x] = element.$element.data("xml-representation");
-			})
-
-			return _toXML(_toArray($rows));
-		}
 
 
 		/*********************************************************************
@@ -258,6 +381,10 @@
 		}
 
 		_initiateGrid()
+		if($params["toolbar"].length > 0) { 
+			console.log("Initiating ToolBar")
+			_toolbarGeneration()
+		}
 
 		//<- Debug which should throw error
 		if(!$elements.is("textarea")) {

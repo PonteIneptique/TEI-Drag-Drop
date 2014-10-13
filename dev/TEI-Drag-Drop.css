@@ -12,7 +12,6 @@
 	position: absolute;
 	z-index: 1;
 	font-weight: bold;
-	line-height: 4em;
 	text-align: center;
 	cursor: pointer;
 	-webkit-transition: top 0.2s,
@@ -31,16 +30,22 @@
 	-webkit-transition: background 3s;
 }
 .teidragdrop-container > ul li.changed .inner {
-background: #ffff66;
--webkit-transition: none;
+	background: #ffff66;
+	-webkit-transition: none;
 }
 .teidragdrop-container > ul li.ui-draggable-dragging {
--webkit-transition: none;
+	-webkit-transition: none;
 }
-.teidragdrop-container > ul li.position-highlight {
--webkit-transition: none;
+	.teidragdrop-container > ul li.position-highlight {
+	-webkit-transition: none;
 }
 .teidragdrop-container > ul li.position-highlight .inner {
-border: none;
-background: #ccc;
+	border: none;
+	background: #ccc;
+}
+
+.teidragdrop-toolbar {
+	margin:5px;
+	padding:5px;
+	background: grey;
 }
