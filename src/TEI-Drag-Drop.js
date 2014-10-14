@@ -99,6 +99,7 @@
 			//Initiating the grid
 			if(this.settings["grid-selector"] !== null) {
 				this.container = $(this.settings["grid-selector"]);
+				this.container.addClass("teidragdrop-container");
 			} else {
 				instanceNumber = 0;
 				while ($(".teidragdrop-container" + instanceNumber).length !== 0) {
@@ -410,6 +411,7 @@
 	});
 
 	$.fn.teidragdrop = function(options) {
+   		var args = arguments;
 		if (!window.GridList) {
 			throw new Error("GridList lib required");
 		}

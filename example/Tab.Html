@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Example with hierarchical data</title>
+		<script src="../plugins/jquery.min.js"></script>
+		<script src="../plugins/jqueryUI.min.js"></script>
+		<script src="../plugins/gridList.js"></script>
+		<script src="../plugins/jquery.gridList.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+		<script src="../src/TEI-Drag-Drop.js"></script>
+
+		<link rel="stylesheet" href="../dist/TEI-Drag-Drop.css" />
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+
+			<!-- Nav tabs -->
+			<div class="row">
+				<h1>Example with a nice UI</h1>
+			</div>
+			<ul class="nav nav-tabs" role="tablist">
+			  <li><a href="#input" role="tab" data-toggle="tab">XML</a></li>
+			  <li class="active"><a href="#grid" role="tab" data-toggle="tab">Grid</a></li>
+			  <li><a href="#output" role="tab" data-toggle="tab" id="update-output">Output</a></li>
+			</ul>
+			<!-- Tab panes -->
+			<div class="tab-content">
+			  <div class="tab-pane" id="input">
+			  	<textarea id="textarea">
+<w facs="urn:cite:perseus:epifacsimg.77@0.0691,0.3912,0.032,0.0498">εἴ</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.1051,0.3807,0.0601,0.0559">τις</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.1712,0.3852,0.0521,0.0483">ἐν</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.2242,0.3852,0.2032,0.0483">ἀνθρώποις</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.4274,0.3852,0.1401,0.0514">ἀρετῆς</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.5656,0.3807,0.1021,0.0589">ἕνεκ'</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.6677,0.3852,0.2923,0.0529">ἐστεφανώθη</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.0711,0.4426,0.1952,0.0498">πλεῖστον</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.2633,0.435,0.0891,0.0514">ἐγὼ</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.3554,0.4381,0.2122,0.0468">μετέχων</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.5656,0.4381,0.0831,0.0453">τοδ'</w>
+<w facs="urn:cite:perseus:epifacsimg.77@0.6426,0.4381,0.1592,0.0498">ἔτυχον</w>
+			  	</textarea>
+			  </div>
+			  <div class="tab-pane active" id="grid">
+			  	
+			  </div>
+			  <div class="tab-pane" id="output">
+			  	<pre></pre>
+			  </div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$("#textarea").teidragdrop({
+				"toolbar" : [],
+				"grid-selector" : "#grid"
+			});
+			$("#update-output").on("click", function() {
+				$("#output > pre ").text($("#textarea").teidragdrop("serialize"))
+			});
+		</script>
+	</body>
+</html>
