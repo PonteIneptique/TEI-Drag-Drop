@@ -320,8 +320,8 @@
 				$rows = {};
 				
 			for (var i = this.settings.rows - 1; i >= 0; i--) {
-				$rows[i] = {}
-			};
+				$rows[i] = {};
+			}
 			$.each($items, function(index, element) {
 				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
 				$rows[element.y][element.x] = element.$element.data("xml-representation");
@@ -377,10 +377,9 @@
 			/*
 			 *		Return the position for a new item, including if $grid is not instantiated
 			 */
-			 //Should use now the grid element size  this.settings.blocksWidth
+			var x;
 			if(typeof this.grid === "undefined" || typeof this.getInstance() === "undefined" || typeof this.getInstance()._items === "undefined" ) {
 				if(typeof items === "number") {
-					var x;
 					if(items === 1) {
 						x = items - 1; // items = length of children
 					} else {
@@ -394,8 +393,9 @@
 
 			var $items = this.getInstance()._items,
 				$rows = {},
-				x = 0,
 				y = 0;
+
+			x = 0;
 			$.each($items, function(index, element) {
 				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
 				$rows[element.y][element.x] = element.$element.data("xml-representation");
