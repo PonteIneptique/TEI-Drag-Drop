@@ -175,8 +175,8 @@
 					$inputaddon = $("<span />", { "class" : "input-group-addon", text : this.lang.UpdateLines}),
 					$inputtext = $("<input />", { "class" : "form-control", type : "text", value : this.settings.rows, placeholder : this.lang.Lines});
 				
-				$inputtext.on("change", function() { this.upgradeLines($inputtext.val()); });
-				$inputaddon.on("click", function() { this.upgradeLines($inputtext.val()); });
+				$inputtext.on("change", function() { self.upgradeLines($inputtext.val()); });
+				$inputaddon.on("click", function() { self.upgradeLines($inputtext.val()); });
 				$inputgroup.append($inputaddon, $inputtext);
 				$toolbar.append($inputgroup);
 			}
@@ -187,6 +187,7 @@
 			/*
 			 *	Reload with given number of lines
 			 */
+			 consol
 			if(!isNaN(lines)) {
 				this.settings.rows = parseInt(lines);
 				var $instance = this.getInstance();
