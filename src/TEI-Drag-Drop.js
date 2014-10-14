@@ -187,7 +187,6 @@
 			/*
 			 *	Reload with given number of lines
 			 */
-			 consol
 			if(!isNaN(lines)) {
 				this.settings.rows = parseInt(lines);
 				var $instance = this.getInstance();
