@@ -93,9 +93,12 @@
 					$('#textarea').trigger('change');
 				})
 				$("#textarea").teidragdrop({
+					"line" : "<div />",
+					"linegroup" : "<body />", //Dom elements to regroup lines
+					"linebreak" : null, 
 					"hierarchical" : true,
 					"blocksWidth" : 2
-				})
+				});
 			});
 		</script>
 	</body>
