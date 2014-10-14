@@ -31,58 +31,85 @@
         <hr>
 
         <section id="main_content">
-          <article class="markdown-body"><h1 id="examples"><a name="user-content-examples" href="#examples" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Examples</h1>
-          <h2 id="simple-integration"><a name="user-content-simple-integration" href="#simple-integration" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Simple integration</h2>
-          <p><a href="Form-Generation.html">Example 1</a> - This use a textarea as container and use no-hierarchical information</p>
-          <h3 id="javascript"><a name="user-content-javascript" href="#javascript" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Javascript</h3>
-          <pre><code class="javascript">$(&quot;#textarea&quot;).teidragdrop({});
-          </code></pre>
+<article class="markdown-body"><h1 id="examples"><a name="user-content-examples" href="#examples" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Examples</h1>
+<h2 id="simple-integration"><a name="user-content-simple-integration" href="#simple-integration" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Simple integration</h2>
+<p><a href="/home/thibault/dev/TEI-Drag-Drop (copy)/example/Form-Generation.html">Example 1</a> - This use a textarea as container and use no-hierarchical information</p>
+<h3 id="javascript"><a name="user-content-javascript" href="#javascript" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Javascript</h3>
+<pre><code class="javascript">$(&quot;#textarea&quot;).teidragdrop({});
+</code></pre>
 
-          <h3 id="source"><a name="user-content-source" href="#source" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Source</h3>
-          <pre><code class="xml">    &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.0691,0.3912,0.032,0.0498&quot;&gt;εἴ&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.1051,0.3807,0.0601,0.0559&quot;&gt;τις&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.1712,0.3852,0.0521,0.0483&quot;&gt;ἐν&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.2242,0.3852,0.2032,0.0483&quot;&gt;ἀνθρώποις&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.4274,0.3852,0.1401,0.0514&quot;&gt;ἀρετῆς&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.5656,0.3807,0.1021,0.0589&quot;&gt;ἕνεκ'&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.6677,0.3852,0.2923,0.0529&quot;&gt;ἐστεφανώθη&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.0711,0.4426,0.1952,0.0498&quot;&gt;πλεῖστον&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.2633,0.435,0.0891,0.0514&quot;&gt;ἐγὼ&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.3554,0.4381,0.2122,0.0468&quot;&gt;μετέχων&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.5656,0.4381,0.0831,0.0453&quot;&gt;τοδ'&lt;/w&gt;
-              &lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.6426,0.4381,0.1592,0.0498&quot;&gt;ἔτυχον&lt;/w&gt;
-          </code></pre>
+<h3 id="source"><a name="user-content-source" href="#source" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Source</h3>
+<pre><code class="xml">&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.0691,0.3912,0.032,0.0498&quot;&gt;εἴ&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.1051,0.3807,0.0601,0.0559&quot;&gt;τις&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.1712,0.3852,0.0521,0.0483&quot;&gt;ἐν&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.2242,0.3852,0.2032,0.0483&quot;&gt;ἀνθρώποις&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.4274,0.3852,0.1401,0.0514&quot;&gt;ἀρετῆς&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.5656,0.3807,0.1021,0.0589&quot;&gt;ἕνεκ'&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.6677,0.3852,0.2923,0.0529&quot;&gt;ἐστεφανώθη&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.0711,0.4426,0.1952,0.0498&quot;&gt;πλεῖστον&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.2633,0.435,0.0891,0.0514&quot;&gt;ἐγὼ&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.3554,0.4381,0.2122,0.0468&quot;&gt;μετέχων&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.5656,0.4381,0.0831,0.0453&quot;&gt;τοδ'&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.6426,0.4381,0.1592,0.0498&quot;&gt;ἔτυχον&lt;/w&gt;
+</code></pre>
 
-          <h2 id="hierarchical-data-used-as-input"><a name="user-content-hierarchical-data-used-as-input" href="#hierarchical-data-used-as-input" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Hierarchical data used as input</h2>
-          <p><a href="Hierarchy.html">Example 2</a> - This use a textarea as container and use no-hierarchical information</p>
-          <h3 id="javascript_1"><a name="user-content-javascript_1" href="#javascript_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Javascript</h3>
-          <pre><code class="javascript">    $(&quot;#textarea&quot;).teidragdrop({
-                  &quot;line&quot; : &quot;&lt;div /&gt;&quot;, //The wrapper for elements is a div
-                  &quot;linegroup&quot; : &quot;&lt;body /&gt;&quot;, //The wrapper of wrappers is body
-                  &quot;linebreak&quot; : null,  //No milestone system before the end of div
-                  &quot;hierarchical&quot; : true, //Our data are hierarchical, we input data such as &lt;lg /&gt;&lt;l /&gt;
-                  &quot;blocksWidth&quot; : 2 //We set the width to 2
-              });
-          </code></pre>
+<h2 id="hierarchical-data-used-as-input"><a name="user-content-hierarchical-data-used-as-input" href="#hierarchical-data-used-as-input" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Hierarchical data used as input</h2>
+<p><a href="/home/thibault/dev/TEI-Drag-Drop (copy)/example/Hierarchy.html">Example 2</a> - This use a textarea as container and use no-hierarchical information</p>
+<h3 id="javascript_1"><a name="user-content-javascript_1" href="#javascript_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Javascript</h3>
+<pre><code class="javascript">    $(&quot;#textarea&quot;).teidragdrop({
+        &quot;line&quot; : &quot;&lt;div /&gt;&quot;, //The wrapper for elements is a div
+        &quot;linegroup&quot; : &quot;&lt;body /&gt;&quot;, //The wrapper of wrappers is body
+        &quot;linebreak&quot; : null,  //No milestone system before the end of div
+        &quot;hierarchical&quot; : true, //Our data are hierarchical, we input data such as &lt;lg /&gt;&lt;l /&gt;
+        &quot;blocksWidth&quot; : 2 //We set the width to 2
+    });
+</code></pre>
 
-          <h3 id="source_1"><a name="user-content-source_1" href="#source_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Source</h3>
-          <pre><code class="xml">&lt;lg&gt;
-              &lt;l&gt;I am a line with two levels&lt;/l&gt;
-              &lt;l&gt;Which is fun&lt;/l&gt;
-          &lt;/lg&gt;
-          &lt;lg&gt;
-              &lt;l&gt;I am a line with three levels&lt;/l&gt;
-              &lt;l&gt;Which is fun, really&lt;/l&gt;
-              &lt;l&gt;I said really&lt;/l&gt;
-              I am a text node, nobody cares
-          &lt;/lg&gt;
-          &lt;lg&gt;
-              &lt;l&gt;I am a line with one level :'(&lt;/l&gt;
-          &lt;/lg&gt;
-          &lt;lg&gt;
-              &lt;l&gt;I am another line with one level :'(&lt;/l&gt;
-          &lt;/lg&gt;
-          </code></pre></article>
+<h3 id="source_1"><a name="user-content-source_1" href="#source_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Source</h3>
+<pre><code class="xml">&lt;lg&gt;
+    &lt;l&gt;I am a line with two levels&lt;/l&gt;
+    &lt;l&gt;Which is fun&lt;/l&gt;
+&lt;/lg&gt;
+&lt;lg&gt;
+    &lt;l&gt;I am a line with three levels&lt;/l&gt;
+    &lt;l&gt;Which is fun, really&lt;/l&gt;
+    &lt;l&gt;I said really&lt;/l&gt;
+    I am a text node, nobody cares
+&lt;/lg&gt;
+&lt;lg&gt;
+    &lt;l&gt;I am a line with one level :'(&lt;/l&gt;
+&lt;/lg&gt;
+&lt;lg&gt;
+    &lt;l&gt;I am another line with one level :'(&lt;/l&gt;
+&lt;/lg&gt;
+</code></pre>
+
+<h2 id="example-with-api-access-and-nice-layout"><a name="user-content-example-with-api-access-and-nice-layout" href="#example-with-api-access-and-nice-layout" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Example with API access and nice layout</h2>
+<p><a href="Tab.html">Example 3</a> - This use a tab system from Bootstrap</p>
+<h3 id="javascript_2"><a name="user-content-javascript_2" href="#javascript_2" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Javascript</h3>
+<pre><code class="javascript">$(&quot;#textarea&quot;).teidragdrop({
+    &quot;toolbar&quot; : [],
+    &quot;grid-selector&quot; : &quot;#grid&quot;
+});
+$(&quot;#update-output&quot;).on(&quot;click&quot;, function() {    //Triggers the Output upgrade when changing tab
+    $(&quot;#output &gt; pre &quot;).text($(&quot;#textarea&quot;).teidragdrop(&quot;serialize&quot;))
+});
+</code></pre>
+
+<h3 id="source_2"><a name="user-content-source_2" href="#source_2" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Source</h3>
+<pre><code class="xml">&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.0691,0.3912,0.032,0.0498&quot;&gt;εἴ&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.1051,0.3807,0.0601,0.0559&quot;&gt;τις&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.1712,0.3852,0.0521,0.0483&quot;&gt;ἐν&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.2242,0.3852,0.2032,0.0483&quot;&gt;ἀνθρώποις&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.4274,0.3852,0.1401,0.0514&quot;&gt;ἀρετῆς&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.5656,0.3807,0.1021,0.0589&quot;&gt;ἕνεκ'&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.6677,0.3852,0.2923,0.0529&quot;&gt;ἐστεφανώθη&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.0711,0.4426,0.1952,0.0498&quot;&gt;πλεῖστον&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.2633,0.435,0.0891,0.0514&quot;&gt;ἐγὼ&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.3554,0.4381,0.2122,0.0468&quot;&gt;μετέχων&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.5656,0.4381,0.0831,0.0453&quot;&gt;τοδ'&lt;/w&gt;
+&lt;w facs=&quot;urn:cite:perseus:epifacsimg.77@0.6426,0.4381,0.1592,0.0498&quot;&gt;ἔτυχον&lt;/w&gt;
+</code></pre></article>
         </section>
 
         <footer>
