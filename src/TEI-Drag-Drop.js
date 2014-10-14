@@ -5,7 +5,7 @@
 	} else {
 		factory(jQuery);
 	}
-}(function($) {
+}(function($) {
 	//PLACEHOLDER FOR FUTURE I18N
 	var $lang = {
 		"GetXML" : "Get XML",
@@ -123,8 +123,6 @@
 				console.log("Initiating ToolBar");
 				this.toolbarGeneration();
 			}
-		},
-		yourOtherFunction: function () {
 		},
 		toolbarGeneration : function() {
 			/*
