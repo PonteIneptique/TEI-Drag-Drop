@@ -84,11 +84,6 @@
 			</div>
 
 		</div>
-		<h2>Grid</h2>
-		<div class="tei-grid-container teidragdrop-container">
-			<ul>
-			</ul>
-		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {	//When DOM is ready
 				$("#test-demo-add-node").on("click", function() {
@@ -100,8 +95,6 @@
 					$('#textarea').trigger('change');
 				})
 				$("#textarea").teidragdrop({
-					"grid-selector" : ".tei-grid-container",
-					"btn" : $("#serialize")
 				})
 			});
 		</script>
