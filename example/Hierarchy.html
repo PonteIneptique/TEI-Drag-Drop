@@ -68,9 +68,13 @@
 					<l>I am a line with three levels</l>
 					<l>Which is fun, really</l>
 					<l>I said really</l>
+					I am a text node, nobody cares
 				</lg>
 				<lg>
 					<l>I am a line with one level :'(</l>
+				</lg>
+				<lg>
+					<l>I am another line with one level :'(</l>
 				</lg>
 			</textarea>
 			<div class="teidragdrop-toolbar">
@@ -89,7 +93,8 @@
 					$('#textarea').trigger('change');
 				})
 				$("#textarea").teidragdrop({
-					"hierarchical" : true
+					"hierarchical" : true,
+					"blocksWidth" : 2
 				})
 			});
 		</script>

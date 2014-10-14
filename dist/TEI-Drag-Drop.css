@@ -9,7 +9,7 @@
 	/* Will be modified by the grid jquery lib, depending on the items */
 	-webkit-transition: width 0.2s;
 }
-.teidragdrop-container > ul li {
+.teidragdrop-container > ul > li {
 	position: absolute;
 	z-index: 1;
 	font-weight: bold;
@@ -22,7 +22,7 @@
 	font-size 0.2s,
 	line-height 0.2s;
 }
-.teidragdrop-container > ul li .inner {
+.teidragdrop-container > ul > li .inner {
     background: none repeat scroll 0 0 #fff;
     border: 1px solid #bbb;
 	position:absolute;
@@ -30,17 +30,17 @@
 	margin: auto;
 	-webkit-transition: background 3s;
 }
-.teidragdrop-container > ul li.changed .inner {
+.teidragdrop-container > ul > li.changed > .inner {
 	background: #ffff66;
 	-webkit-transition: none;
 }
-.teidragdrop-container > ul li.ui-draggable-dragging {
+.teidragdrop-container > ul > li.ui-draggable-dragging {
 	-webkit-transition: none;
 }
-	.teidragdrop-container > ul li.position-highlight {
+	.teidragdrop-container > ul > li.position-highlight {
 	-webkit-transition: none;
 }
-.teidragdrop-container > ul li.position-highlight .inner {
+.teidragdrop-container > ul > li.position-highlight .inner {
 	border: none;
 	background: #ccc;
 }
