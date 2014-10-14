@@ -66,7 +66,8 @@
 			"widthHeightRatio" : 2, //"widthHeightRatio" applied for blocks
 			"startline" : 1, //Line from which we count
 			"pre" : true, //Append a <pre> in the toolbar if set to true
-			"linestool" : true //Add a tool to add lines to grid
+			"linestool" : true, //Add a tool to add lines to grid
+			"rowHeight" : 50
 		};
 
 
@@ -104,7 +105,7 @@
 				this.container = $("<div />", {
 					"class" : "teidragdrop-container teidragdrop-container" + instanceNumber
 				});
-				this.element.after($container);
+				this.element.after(this.container);
 			}
 
 
@@ -247,7 +248,9 @@
 			 *		Initiate the grid. Only function to be called at the end of the setting
 			 */
 			//If there is not <ul>, we need to create one
-			if(this.container.find("ul").length === 0) {  this.container.append("<ul></ul>"); }
+			if(this.container.find("ul").length === 0) {  
+				this.container.append($("<ul />").css("width", "100%").css("height", this.settings.rowHeight * this.settings.rows));
+			}
 			//We initialize gridster
 			this.grid = this.container.find("ul");
 

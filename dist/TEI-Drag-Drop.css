@@ -1,5 +1,6 @@
 .teidragdrop-container {
 	padding:5px;
+	background-color:#004756;
 }
 .teidragdrop-container > ul {
 	position: relative;
