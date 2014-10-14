@@ -5,7 +5,7 @@
 	} else {
 		factory(jQuery);
 	}
-}(function($) {
+}(function($) {
 	//PLACEHOLDER FOR FUTURE I18N
 	var $lang = {
 		"GetXML" : "Get XML",
@@ -67,7 +67,9 @@
 			"startline" : 1, //Line from which we count
 			"pre" : true, //Append a <pre> in the toolbar if set to true
 			"linestool" : true, //Add a tool to add lines to grid
-			"rowHeight" : 50
+			"rowHeight" : 50,
+			"hierarchical" : false, //Take hierarchical informations from node
+			"blocksWidth" : 1 //Default size for blocks
 		};
 
 
@@ -124,8 +126,6 @@
 				this.toolbarGeneration();
 			}
 		},
-		yourOtherFunction: function () {
-		},
 		toolbarGeneration : function() {
 			/*
 			 *	Generate a toolbar
@@ -177,8 +177,8 @@
 					$inputaddon = $("<span />", { "class" : "input-group-addon", text : this.lang.UpdateLines}),
 					$inputtext = $("<input />", { "class" : "form-control", type : "text", value : this.settings.rows, placeholder : this.lang.Lines});
 				
-				$inputtext.on("change", function() { this.upgradeLines($inputtext.val()); });
-				$inputaddon.on("click", function() { this.upgradeLines($inputtext.val()); });
+				$inputtext.on("change", function() { self.upgradeLines($inputtext.val()); });
+				$inputaddon.on("click", function() { self.upgradeLines($inputtext.val()); });
 				$inputgroup.append($inputaddon, $inputtext);
 				$toolbar.append($inputgroup);
 			}
@@ -208,6 +208,8 @@
 				if(block.nodeType !== 3 && indexOf.call(hashes, hash) === -1) {
 					blocks.push(block);
 					hashes.push(hash);
+
+
 				}
 			});
 			this.hashes = hashes;
@@ -219,19 +221,33 @@
 			 */
 			var $block = $("<li />"),
 				$wrapper = $("<div />").html(block),	//Work around for getting proper properties
-				$xy  = this.lastItem(this.grid.find("li").length + 1);
+				$xy  = this.lastItem(this.grid.children("li").length + 1),
+				$inner = $("<div />", { "class" : "inner" });
 
 
 			$block.data("xml-representation", $wrapper.html());
-			$block.append($("<div />", { "class" : "inner" }).text($wrapper.text()));
-			$block.attr("data-w", 1);
-			$block.attr("data-h", 1);
 
+			if(this.settings.hierarchical) {
+				$block.attr("data-h", $(block).find("*").length);
+				$block.append();
+				var $ul = $("<ul />", { "class" : "list-unstyled inner"});
+				$(block).find("*").each(function(index, element) {
+					$ul.append($("<li />", {
+						text : $(element).text()
+					}));
+				});
+				$inner.append($ul);
+
+			} else {
+				$block.attr("data-h", 1);
+				$inner.text($wrapper.text());
+			}
+			$block.attr("data-w", this.settings.blocksWidth);
 			$block.attr("data-x", $xy[0]);
 			$block.attr("data-y", $xy[1]);
 
+			$block.append($inner);
 			//A new item should be added at the end of the list
-
 			this.grid.append($block);
 		},
 		addBlocks : function(list) {
@@ -302,6 +318,10 @@
 			 */
 			var $items = this.getInstance()._items,
 				$rows = {};
+				
+			for (var i = this.settings.rows - 1; i >= 0; i--) {
+				$rows[i] = {};
+			}
 			$.each($items, function(index, element) {
 				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
 				$rows[element.y][element.x] = element.$element.data("xml-representation");
@@ -357,9 +377,15 @@
 			/*
 			 *		Return the position for a new item, including if $grid is not instantiated
 			 */
+			var x;
 			if(typeof this.grid === "undefined" || typeof this.getInstance() === "undefined" || typeof this.getInstance()._items === "undefined" ) {
 				if(typeof items === "number") {
-					return [items - 1, 0];
+					if(items === 1) {
+						x = items - 1; // items = length of children
+					} else {
+						x = (items - 1 ) * this.settings.blocksWidth ;
+					}
+					return [x, 0];
 				} else {
 					return false;
 				}
@@ -367,8 +393,9 @@
 
 			var $items = this.getInstance()._items,
 				$rows = {},
-				x = 0,
 				y = 0;
+
+			x = 0;
 			$.each($items, function(index, element) {
 				if(typeof $rows[element.y] === "undefined") { $rows[element.y] = {}; }
 				$rows[element.y][element.x] = element.$element.data("xml-representation");

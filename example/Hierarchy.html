@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Example with hierarchical data</title>
+		<script src="../plugins/jquery.min.js"></script>
+		<script src="../plugins/jqueryUI.min.js"></script>
+		<script src="../plugins/gridList.js"></script>
+		<script src="../plugins/jquery.gridList.js"></script>
+
+		<script src="../src/TEI-Drag-Drop.js"></script>
+
+		<link rel="stylesheet" href="../dist/TEI-Drag-Drop.css" />
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+		<style type="text/css">
+			html, body, #form {
+				margin:0;
+				padding:0;
+				width:100%;
+			}
+
+			#form > #textarea {
+				padding:0;
+				border:0;
+				border-top:1px solid grey;
+				border-bottom:1px solid grey;
+			}
+			.tei-grid-container {
+				background-color:#004756;
+				height:200px;
+			}
+			ul, ol {
+			    list-style: none outside none;
+			}
+
+			.container {
+				border: 1px dashed #ccc;
+				position: relative;
+			}
+
+			.container > div {
+				background: #CCC;
+				height: 100px;
+				position: absolute;
+				width: 80px;
+			}
+
+			.container > div[data-ss-colspan='2'] { width: 170px; }
+
+			.container .ss-placeholder-child {
+				background: transparent;
+				border: 1px dashed red;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="form">
+			<h2>Form</h2>
+			<textarea id="textarea">
+				<lg>
+					<l>I am a line with two levels</l>
+					<l>Which is fun</l>
+				</lg>
+				<lg>
+					<l>I am a line with three levels</l>
+					<l>Which is fun, really</l>
+					<l>I said really</l>
+					I am a text node, nobody cares
+				</lg>
+				<lg>
+					<l>I am a line with one level :'(</l>
+				</lg>
+				<lg>
+					<l>I am another line with one level :'(</l>
+				</lg>
+			</textarea>
+			<div class="teidragdrop-toolbar">
+				<button type="button" class="btn btn-success" id="test-demo-add-node">Add new node</button>
+			</div>
+
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {	//When DOM is ready
+				$("#test-demo-add-node").on("click", function() {
+					$("#textarea").val(
+						$("#textarea").val() + 
+						'\n<w facs="urn:cite:perseus:epifacsimg.77@0.8028,0.4366,0.1562,0.0529">στεφάν<supplied reason="lost">ο</supplied></w>'
+					)
+					//.val() method in jQuery doesn't trigger change, so we trigger it manually
+					$('#textarea').trigger('change');
+				})
+				$("#textarea").teidragdrop({
+					"hierarchical" : true,
+					"blocksWidth" : 2
+				})
+			});
+		</script>
+	</body>
+</html>
